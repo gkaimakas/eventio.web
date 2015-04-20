@@ -1,0 +1,50 @@
+<md-content flex layout layout-align="center start">
+    <md-whiteframe class="md-whiteframe-z1" flex layout-padding>
+        <form layout-margin layout-padding>
+            <header>
+
+                <h3>{{'category_create_title' | translate}}</h3>
+                <md-divider></md-divider>
+            </header>
+            <section layout="row" layout-padding>
+                <md-input-container flex="70">
+                    <label>
+                        {{'category_name' | translate}}
+                    </label>
+                    <input type="text">
+                </md-input-container>
+
+                <md-select placeholder="{{'category_locale_default' | translate}}" ng-model="defaultLocale" flex="30" class="align-with-input">
+                    <md-option ng-repeat="locale in supportedLocales" value="{{locale.value}}" translate>{{locale.translation}}</md-option>
+                </md-select>
+
+            </section>
+            <section layout-padding>
+                <section layout="row" layout-padding ng-repeat="locale in addedLocales">
+                    <md-input-container flex="70">
+                        <label>
+                            {{'category_name' | translate}}
+                        </label>
+                        <input type="text" ng-model="additionalValues[$index]">
+                    </md-input-container>
+
+                    <md-select placeholder="{{'category_locale' | translate}}" flex class="align-with-input" ng-model="additionalLocales[$index]">
+                        <md-option ng-repeat="locale in supportedLocales" value="{{locale.value}}" translate>{{locale.translation}}</md-option>
+                    </md-select>
+
+                    <md-button ng-click="removeAdditionalLocale($index)">
+                        <img src="../bower_components/material-design-icons/content/1x_web/ic_clear_grey600_24dp.png">
+                    </md-button>
+
+                </section>
+
+                <md-button class="pull-right" ng-click="addAdditionalLocale()">{{ 'category_locale_add' | translate}}</md-button>
+            </section>
+
+            {{addedLocales}}
+            {{additionalValues}}
+            {{additionalLocales}}
+
+        </form>
+    </md-whiteframe>
+</md-content>

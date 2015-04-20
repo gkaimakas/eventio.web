@@ -1,0 +1,15 @@
+.http-code {
+    font-size: 10em;
+    font-weight: 100;
+    display: inline-block;
+}
+
+.http-title{
+    font-size: 2em;
+    font-weight: 300;
+}
+
+.http-description {
+    font-size: 1em;
+    text-align: center;
+}

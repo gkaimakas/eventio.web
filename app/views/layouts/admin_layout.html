@@ -1,0 +1,37 @@
+<div class="full-page" layout="row" ng-controller="AdminLayoutController">
+
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+
+        <md-content flex role="navigation" class="md-default-theme">
+            <ul class="nav-list">
+                <li>
+                    <a ui-sref="admin.account" class="no-decor">
+                        <div class="profile-preview">
+                            <div class="primary-text">Account Name,dsjfbsdf ldsfs lsdkfns</div>
+                            <div class="secondary-text">lorem | ipsum | dolor</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <md-button class="full-width text-left height-50" ui-sref="admin.category">
+                        {{ 'nav_category' | translate}}
+                    </md-button>
+                </li>
+            </ul>
+        </md-content>
+    </md-sidenav>
+
+    <div layout="column" flex tabindex="-1" role="main" class="full-height overflow-y">
+        <md-toolbar class="md-default-theme" layout="row">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" ng-click="toggleSidenav()" aria-label="Settings" hide-gt-md>
+                    <img src="../bower_components/material-design-icons/navigation/1x_web/ic_menu_white_24dp.png">
+                </md-button>
+                <h4>{{ 'appName' | translate}}</h4>
+            </div>
+        </md-toolbar>
+
+        <div ui-view="content" flex layout-padding>
+        </div>
+    </div>
+</div>
