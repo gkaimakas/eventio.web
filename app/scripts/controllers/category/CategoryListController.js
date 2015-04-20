@@ -11,7 +11,7 @@ angular.module('eventioWebApp')
             $scope.currentPage = 0;
             $scope.disablePaging = false;
 
-            Restangular.one('image')
+            Restangular.one('category')
                 .get()
                 .then(function (categories) {
                     $scope.categories = categories.results;
@@ -24,7 +24,7 @@ angular.module('eventioWebApp')
             $scope.getMoreCategories = function () {
                 if ($scope.currentPage == 0 || $scope.currentPage < $scope.totalPages) {
                     $scope.disablePaging = true;
-                    Restangular.one('image')
+                    Restangular.one('category')
                         .get({
                             page: $scope.currentPage + 1
                         })

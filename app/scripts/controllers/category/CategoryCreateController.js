@@ -7,9 +7,8 @@ angular.module('eventioWebApp')
         '$scope',
         'locales',
         'Restangular',
-        function($scope, locales, Restangular){
-            console.log(locales);
-
+        '$mdToast',
+        function($scope, locales, Restangular, $mdToast){
             $scope.supportedLocales = locales;
             $scope.addedLocales = [];
 
@@ -26,5 +25,23 @@ angular.module('eventioWebApp')
                 $scope.additionalLocales.splice(index,1);
                 $scope.additionalValues.splice(index,1);
             };
+
+            $scope.category = {};
+            $scope.submit = function(form, data){
+                console.log(data);
+
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content('Simple Toast!')
+                        .position('bottom left')
+                        .hideDelay(3000)
+                );
+                Restangular
+                    .all('category')
+                    .post(data)
+                    .then(function(res){
+                       console.log(res);
+                    });
+            }
         }
     ]);

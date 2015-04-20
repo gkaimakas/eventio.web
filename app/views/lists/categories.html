@@ -1,17 +1,22 @@
 <md-content flex layout>
     <md-whiteframe class="md-whiteframe-z1" flex>
         <md-list>
-            <md-list-item class="md-3-line" ng-repeat="category in categories" infinite-scroll="getMoreCategories()" infinite-scroll-disabled=disablePaging >
+            <md-list-item class="md-3-line" ng-repeat="category in categories" infinite-scroll="getMoreCategories()"
+                          infinite-scroll-disabled=disablePaging >
                 <div class="md-list-item-text" layout-padding>
-                    <h4>{{$index}} {{category.id}}</h4>
-                    <p> available locales</p>
+                    <h4>{{category.name}}</h4>
+                    <p>
+                        <span ng-repeat="locale in category.availableLocales">
+                            {{locale}}
+                            <span ng-hide="$last">|</span>
+                        </span>
+                    </p>
                 </div>
-                <md-divider></md-divider>
+                <md-divider ng-hide="$last"></md-divider>
             </md-list-item>
         </md-list>
     </md-whiteframe>
 </md-content>
-
 
 <md-button class="md-fab md-primary fab-bottom-right" aria-label="Use Android" ui-sref="admin.categoryCreate">
     <img src="../bower_components/material-design-icons/content/1x_web/ic_add_white_24dp.png">

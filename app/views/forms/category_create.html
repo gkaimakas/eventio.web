@@ -1,6 +1,6 @@
 <md-content flex layout layout-align="center start">
     <md-whiteframe class="md-whiteframe-z1" flex layout-padding>
-        <form layout-margin layout-padding>
+        <form name="form" layout-margin layout-padding ng-submit="submit(form, category)">
             <header>
 
                 <h3>{{'category_create_title' | translate}}</h3>
@@ -11,10 +11,10 @@
                     <label>
                         {{'category_name' | translate}}
                     </label>
-                    <input type="text">
+                    <input type="text" ng-model="category.name">
                 </md-input-container>
 
-                <md-select placeholder="{{'category_locale_default' | translate}}" ng-model="defaultLocale" flex="30" class="align-with-input">
+                <md-select placeholder="{{'category_locale_default' | translate}}" ng-model="category.locale" flex="30" class="align-with-input">
                     <md-option ng-repeat="locale in supportedLocales" value="{{locale.value}}" translate>{{locale.translation}}</md-option>
                 </md-select>
 
@@ -44,6 +44,8 @@
             {{addedLocales}}
             {{additionalValues}}
             {{additionalLocales}}
+
+            <md-button type="submit">submit</md-button>
 
         </form>
     </md-whiteframe>
