@@ -25,25 +25,24 @@
                         <label>
                             {{'category_name' | translate}}
                         </label>
-                        <input type="text" ng-model="additionalValues[$index]">
+                        <input type="text" ng-model="category.additionalValues[$index]">
                     </md-input-container>
 
-                    <md-select placeholder="{{'category_locale' | translate}}" flex class="align-with-input" ng-model="additionalLocales[$index]">
+                    <md-select placeholder="{{'category_locale' | translate}}" flex class="align-with-input" ng-model="category.additionalLocales[$index]">
                         <md-option ng-repeat="locale in supportedLocales" value="{{locale.value}}" translate>{{locale.translation}}</md-option>
                     </md-select>
 
-                    <md-button ng-click="removeAdditionalLocale($index)">
+                    <md-button ng-click="removeAdditionalLocale($index)" type="button" aria-label="remove entry">
                         <img src="../bower_components/material-design-icons/content/1x_web/ic_clear_grey600_24dp.png">
                     </md-button>
 
                 </section>
 
-                <md-button class="pull-right" ng-click="addAdditionalLocale()">{{ 'category_locale_add' | translate}}</md-button>
+                <md-button type="button" class="pull-right" ng-click="addAdditionalLocale()">{{ 'category_locale_add' | translate}}</md-button>
             </section>
 
-            {{addedLocales}}
-            {{additionalValues}}
-            {{additionalLocales}}
+            {{category.additionalLocales}}
+            {{category.additionalValues}}
 
             <md-button type="submit">submit</md-button>
 

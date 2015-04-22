@@ -3,45 +3,62 @@
  */
 
 angular.module('eventioWebApp')
-.controller('CategoryCreateController', [
+    .controller('CategoryCreateController', [
         '$scope',
         'locales',
         'Restangular',
         '$mdToast',
-        function($scope, locales, Restangular, $mdToast){
+        'i18nService',
+        function ($scope, locales, Restangular, $mdToast, i18n) {
             $scope.supportedLocales = locales;
             $scope.addedLocales = [];
 
-            $scope.additionalLocales = [];
-            $scope.additionalValues = [];
-
-
-            $scope.addAdditionalLocale = function(){
+            $scope.addAdditionalLocale = function () {
                 $scope.addedLocales.push((new Date()).getTime());
             };
 
-            $scope.removeAdditionalLocale = function(index){
+            $scope.category = {};
+            $scope.category.additionalLocales = [];
+            $scope.category.additionalValues = [];
+
+            $scope.removeAdditionalLocale = function (index) {
                 $scope.addedLocales.splice(index, 1);
-                $scope.additionalLocales.splice(index,1);
-                $scope.additionalValues.splice(index,1);
+                $scope.category.additionalLocales.splice(index, 1);
+                $scope.category.additionalValues.splice(index, 1);
             };
 
-            $scope.category = {};
-            $scope.submit = function(form, data){
-                console.log(data);
+            $scope.submit = function (form, data) {
+                var locales = [];
+                var values = [];
 
-                $mdToast.show(
-                    $mdToast.simple()
-                        .content('Simple Toast!')
-                        .position('bottom left')
-                        .hideDelay(3000)
-                );
-                Restangular
-                    .all('category')
-                    .post(data)
-                    .then(function(res){
-                       console.log(res);
-                    });
+                angular.copy(data.additionalLocales, locales);
+                angular.copy(data.additionalValues, values);
+
+                locales.push(data.locale);
+                values.push(data.name);
+
+                var objFinal = {
+                    name: i18n.i18n(values, locales),
+                    locale: data.locale
+                };
+
+                console.log(objFinal);
+
+
+                //
+                //$mdToast.show(
+                //    $mdToast.simple()
+                //        .content('Simple Toast!')
+                //        .position('bottom left')
+                //        .hideDelay(3000)
+                //);
+                //Restangular
+                //    .all('category')
+                //    .post(data)
+                //    .then(function(res){
+                //       console.log(res);
+                //    });
             }
         }
-    ]);
+    ])
+;
