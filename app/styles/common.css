@@ -70,3 +70,12 @@ body *{
     font-weight: 100;
     display: inline-block;
 }
+
+.square-48 {
+    height: 48px;
+    width: 48px;
+}
+
+.margin-top-40 {
+    margin-top: 40px;
+}

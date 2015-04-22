@@ -12,17 +12,18 @@
 
   "back_to_home" : "Επιστροφη στην αρχικη σελιδα.",
 
-  "category_create_title" : "Δημιουργία Νέας Κατηγορίας",
+  "category_create_title" : "Νέα Κατηγορία",
   "category_locale_add" : "Προσθήκη Μετάφρασης",
-  "category_locale_default" : "Κύρια Γλώσσα",
-  "category_locale" : "Δευτερεύουσα Γλώσσα",
+  "category_locale_default" : "Γλώσσα",
+  "category_locale" : "Γλώσσα",
   "category_locale_more_title" : "Επιπλέον Μεταφράσεις",
-  "category_name" : "Όνομα Κατηγορίας",
+  "category_name" : "Όνομα",
 
   "desc_action_category_new" : "Δημιουργία Νέας Κατηγοριας",
 
   "locale_el_gr" : "Ελληνικά",
   "locale_en" : "Αγγλικά",
+  "locale_fr" : "Γαλλικά",
 
   "nav_category" : "Κατηγορίες"
 }

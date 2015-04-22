@@ -27,7 +27,8 @@ angular
     ])
     .constant('locales', [
         { value : 'el-gr', translation : 'locale_el_gr'},
-        { value : 'en', translation : 'locale_en'}
+        { value : 'en', translation : 'locale_en'},
+        { value : 'fr', translation : 'locale_fr'},
     ])
     .config(['$translateProvider', function ($translateProvider) {
         $translateProvider.useStaticFilesLoader({
@@ -97,6 +98,14 @@ angular
                         controller : 'CategoryCreateController'
                     }
                 }
+            })
+            .state('admin.categoryView', {
+                url : '/category/:id',
+                views : {
+                    content : {
+                        template: 'HELLO'
+                    }
+                }
             });
 
     }])
@@ -105,7 +114,7 @@ angular
             .otherwise('/notFound');
     }])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider){
-        cfpLoadingBarProvider.includeSpinner = false;
+        //cfpLoadingBarProvider.includeSpinner = false;
     }])
     .config(['RestangularProvider', function($restangularProvider){
         $restangularProvider.setBaseUrl('http://api.eventio.gr');

@@ -1,8 +1,8 @@
-<md-content flex layout>
-    <md-whiteframe class="md-whiteframe-z1" flex>
+<md-content flex layout layout-align="center">
+    <md-whiteframe class="md-whiteframe-z1" flex="40" flex-sm="100" flex-md="70">
         <md-list>
             <md-list-item class="md-3-line" ng-repeat="category in categories" infinite-scroll="getMoreCategories()"
-                          infinite-scroll-disabled=disablePaging >
+                          infinite-scroll-disabled=disablePaging ui-sref="admin.categoryView({id : category.id})">
                 <div class="md-list-item-text" layout-padding>
                     <h4>{{category.name}}</h4>
                     <p>
