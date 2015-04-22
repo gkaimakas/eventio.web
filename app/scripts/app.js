@@ -26,8 +26,8 @@ angular
         'infinite-scroll'
     ])
     .constant('locales', [
-        { value : "el-gr", translation : "locale_el_gr"},
-        { value : "en", translation : "locale_en"}
+        { value : 'el-gr', translation : 'locale_el_gr'},
+        { value : 'en', translation : 'locale_en'}
     ])
     .config(['$translateProvider', function ($translateProvider) {
         $translateProvider.useStaticFilesLoader({
@@ -84,7 +84,7 @@ angular
                 url : '/category',
                 views : {
                     content : {
-                        templateUrl : "../views/lists/categories.html",
+                        templateUrl : '../views/lists/categories.html',
                         controller : 'CategoryListController'
                     }
                 }
@@ -93,7 +93,7 @@ angular
                 url : '/category/create',
                 views : {
                     content : {
-                        templateUrl : "../views/forms/category_create.html",
+                        templateUrl : '../views/forms/category_create.html',
                         controller : 'CategoryCreateController'
                     }
                 }

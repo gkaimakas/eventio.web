@@ -1,7 +1,7 @@
 /**
  * Created by gkaimakas on 4/22/15.
  */
-
+'use strict';
 angular.module('eventioWebApp')
     .service('i18nService', [function(){
         return {
