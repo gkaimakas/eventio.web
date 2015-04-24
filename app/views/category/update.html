@@ -1,0 +1,68 @@
+<md-content flex layout layout-align="center start" layout-margin>
+
+    <md-whiteframe class="md-whiteframe-z1" layout="row" layout-align="center" flex >
+        <form name="form" layout="column" flex="70" flex-sm="100" flex-md="100" layout-margin layout-padding
+              ng-submit="submit(form, category)">
+            <header>
+
+                <h3>{{'category_update_title' | translate}} : {{category.id}}</h3>
+                <md-divider></md-divider>
+            </header>
+            <section layout="row" layout-md="column" layout-sm="column" layout-padding>
+                <md-input-container flex flex-md="100" flex-sm="100">
+                    <label>
+                        {{'category_name' | translate}}
+                    </label>
+                    <input type="text" ng-model="category.name">
+                </md-input-container>
+
+                <md-select placeholder="{{'category_locale_default' | translate}}" ng-model="category.locale" flex="30"
+                           flex-md="100" flex-sm="100" class="align-with-input">
+                    <md-option ng-repeat="locale in supportedLocales" value="{{locale.value}}" translate>
+                        {{locale.translation}}
+                    </md-option>
+                </md-select>
+
+                <md-button type="button" class="md-fab md-mini md-primary align-with-input" aria-label="new translation"
+                           ng-click="addAdditionalLocale()">
+                    <img src="../../../bower_components/material-design-icons/content/1x_web/ic_add_white_24dp.png">
+                    <md-tooltip md-direction="top">
+                        {{ 'category_locale_add' | translate }}
+                    </md-tooltip>
+                </md-button>
+
+            </section>
+            <section>
+                <section ng-repeat="locale in addedLocales" layout="row" layout-align="center center">
+                    <section layout="row" layout-md="column" layout-sm="column" flex layout-padding
+                             >
+                        <md-input-container flex flex-md="100" flex-sm="100">
+                            <label>
+                                {{'category_name' | translate}}
+                            </label>
+                            <input type="text" ng-model="category.additionalValues[$index]">
+                        </md-input-container>
+
+                        <md-select placeholder="{{'category_locale' | translate}}" flex="30" flex-md="100" flex-sm="100"
+                                   class="align-with-input" ng-model="category.additionalLocales[$index]">
+                            <md-option ng-repeat="locale in supportedLocales" value="{{locale.value}}" translate>
+                                {{locale.translation}}
+                            </md-option>
+                        </md-select>
+
+                    </section>
+
+                    <md-button ng-click="removeAdditionalLocale($index)" type="button" aria-label="remove entry"
+                               class="md-icon-button align-with-input square-48">
+                        <img src="../../../bower_components/material-design-icons/content/1x_web/ic_clear_grey600_24dp.png">
+                    </md-button>
+                </section>
+            </section>
+
+            <section layout="row" class="margin-top-40" layout-align="end">
+                <md-button type="button" class="md-primary" ng-click="remove()">{{ 'submit_remove' | translate}}</md-button>
+                <md-button type="submit" class="md-primary md-raised margin-left" >{{ 'submit_update' | translate}}</md-button>
+            </section>
+        </form>
+    </md-whiteframe>
+</md-content>

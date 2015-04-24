@@ -18,11 +18,14 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/http.css">
-    <link rel="stylesheet" href="styles/profile.css">
-    <link rel="stylesheet" href="styles/animate.ext.css">
-    <link rel="stylesheet" href="styles/loading-bar.ext.css">
+
+    <!-- include: "type":"css", "files":"styles/*.css" -->
+    <link href="/styles/animate.ext.css" rel="stylesheet" type="text/css">
+    <link href="/styles/common.css" rel="stylesheet" type="text/css">
+    <link href="/styles/http.css" rel="stylesheet" type="text/css">
+    <link href="/styles/loading-bar.ext.css" rel="stylesheet" type="text/css">
+    <link href="/styles/profile.css" rel="stylesheet" type="text/css">
+    <!-- /include -->
     <!-- endbuild -->
 </head>
 <body ng-app="eventioWebApp">
@@ -79,13 +82,17 @@
 <script src="scripts/app.js"></script>
 
 <!-- Controllers -->
-<script src="scripts/controllers/AdminLayoutController.js"></script>
-<script src="scripts/controllers/category/CategoryCreateController.js"></script>
-<script src="scripts/controllers/category/CategoryListController.js"></script>
+<!-- include: "type":"js", "files":"scripts/controllers/**/*.js" -->
+<script src="/scripts/controllers/AdminLayoutController.js"></script>
+<script src="/scripts/controllers/category/CategoryCreateController.js"></script>
+<script src="/scripts/controllers/category/CategoryListController.js"></script>
+<script src="/scripts/controllers/category/CategoryUpdateController.js"></script>
+<!-- /include -->
 
-<!-- Directives -->
-<!-- Service -->
-<script src="scripts/services/i18n.js"></script>
+<!-- include: "type":"js", "files":"scripts/services/**/*.js" -->
+<script src="/scripts/services/i18n.js"></script>
+<!-- /include -->
+
 <!-- endbuild -->
 </body>
 </html>

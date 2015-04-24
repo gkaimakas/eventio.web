@@ -79,3 +79,11 @@ body *{
 .margin-top-40 {
     margin-top: 40px;
 }
+
+.margin-left {
+    margin-left: 20px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

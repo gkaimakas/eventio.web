@@ -1,6 +1,5 @@
 <md-content flex layout layout-align="center start">
-
-    <md-whiteframe class="md-whiteframe-z1" layout="row" layout-align="center" flex layout-padding>
+    <md-whiteframe class="md-whiteframe-z1" layout="row" layout-align="center" flex layout-margin>
         <form name="form" layout="column" flex="70" flex-sm="100" flex-md="100" layout-margin layout-padding
               ng-submit="submit(form, category)">
             <header>
@@ -25,7 +24,7 @@
 
                 <md-button type="button" class="md-fab md-mini md-primary align-with-input" aria-label="new translation"
                            ng-click="addAdditionalLocale()">
-                    <img src="../bower_components/material-design-icons/content/1x_web/ic_add_white_24dp.png">
+                    <img src="../../../bower_components/material-design-icons/content/1x_web/ic_add_white_24dp.png">
                     <md-tooltip md-direction="top">
                         {{ 'category_locale_add' | translate }}
                     </md-tooltip>
@@ -35,7 +34,7 @@
             <section>
                 <section ng-repeat="locale in addedLocales" layout="row" layout-align="center center">
                     <section layout="row" layout-md="column" layout-sm="column" flex layout-padding
-                             >
+                            >
                         <md-input-container flex flex-md="100" flex-sm="100">
                             <label>
                                 {{'category_name' | translate}}
@@ -54,7 +53,7 @@
 
                     <md-button ng-click="removeAdditionalLocale($index)" type="button" aria-label="remove entry"
                                class="md-icon-button align-with-input square-48">
-                        <img src="../bower_components/material-design-icons/content/1x_web/ic_clear_grey600_24dp.png">
+                        <img src="../../../bower_components/material-design-icons/content/1x_web/ic_clear_grey600_24dp.png">
                     </md-button>
                 </section>
             </section>

@@ -1,13 +1,13 @@
-<md-content flex layout layout-align="center">
-    <md-whiteframe class="md-whiteframe-z1" flex="40" flex-sm="100" flex-md="70">
+<md-content flex layout layout-align="center" layout-margin>
+    <md-whiteframe class="md-whiteframe-z1" flex= flex-sm="100" flex-md="70">
         <md-list>
             <md-list-item class="md-3-line" ng-repeat="category in categories" infinite-scroll="getMoreCategories()"
-                          infinite-scroll-disabled=disablePaging ui-sref="admin.categoryView({id : category.id})">
-                <div class="md-list-item-text" layout-padding>
+                          infinite-scroll-disabled=disablePaging ui-sref="admin.category.update({id : category.id})">
+                <div class="md-list-item-text cursor-pointer" layout-padding>
                     <h4>{{category.name}}</h4>
                     <p>
                         <span ng-repeat="locale in category.availableLocales">
-                            {{locale}}
+                            {{translateLocale(locale) | translate}}
                             <span ng-hide="$last">|</span>
                         </span>
                     </p>
@@ -18,8 +18,8 @@
     </md-whiteframe>
 </md-content>
 
-<md-button class="md-fab md-primary fab-bottom-right" aria-label="Use Android" ui-sref="admin.categoryCreate">
-    <img src="../bower_components/material-design-icons/content/1x_web/ic_add_white_24dp.png">
+<md-button class="md-fab md-primary fab-bottom-right" aria-label="Use Android" ui-sref="admin.category.create">
+    <img src="../../../bower_components/material-design-icons/content/1x_web/ic_add_white_24dp.png">
     <md-tooltip md-direction="left">
         {{ 'desc_action_category_new' | translate }}
     </md-tooltip>

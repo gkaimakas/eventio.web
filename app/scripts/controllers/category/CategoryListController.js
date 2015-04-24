@@ -6,10 +6,20 @@ angular.module('eventioWebApp')
     .controller('CategoryListController', [
         '$scope',
         'Restangular',
-        function ($scope, Restangular) {
+        'locales',
+        function ($scope, Restangular, locales) {
 
             $scope.currentPage = 0;
             $scope.disablePaging = false;
+            $scope.supportedLocales = locales;
+
+            $scope.translateLocale = function(locale){
+                for(var i=0; i< $scope.supportedLocales.length; i++){
+                    if($scope.supportedLocales[i].value === locale){
+                        return $scope.supportedLocales[i].translation;
+                    }
+                }
+            };
 
             Restangular.one('category')
                 .get()
@@ -37,7 +47,6 @@ angular.module('eventioWebApp')
                             $scope.currentPage = categories.currentPage;
                             $scope.totalPages = categories.totalPages;
                             $scope.disablePaging = false;
-                            console.log($scope.currentPage);
                         });
                 }
             };

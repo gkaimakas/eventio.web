@@ -34,13 +34,11 @@ angular.module('eventioWebApp')
                 angular.copy(data.additionalLocales, locales);
                 angular.copy(data.additionalValues, values);
 
-                console.log(data.additionalLocales, data.additionalValues);
-
                 locales.push(data.locale);
                 values.push(data.name);
 
                 var objFinal = {
-                    name: i18n.i18n(values, locales),
+                    name: i18n.serializeToJSON(values, locales),
                     locale: data.locale
                 };
 

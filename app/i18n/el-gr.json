@@ -13,6 +13,7 @@
   "back_to_home" : "Επιστροφη στην αρχικη σελιδα.",
 
   "category_create_title" : "Νέα Κατηγορία",
+  "category_update_title" : " Κατηγορία",
   "category_locale_add" : "Προσθήκη Μετάφρασης",
   "category_locale_default" : "Γλώσσα",
   "category_locale" : "Γλώσσα",
@@ -25,5 +26,9 @@
   "locale_en" : "Αγγλικά",
   "locale_fr" : "Γαλλικά",
 
-  "nav_category" : "Κατηγορίες"
+  "nav_category" : "Κατηγορίες",
+
+  "submit_create" : "Δημιουργία",
+  "submit_update" : "Ενημέρωση",
+  "submit_remove" : "Διαγραφή"
 }

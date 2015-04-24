@@ -80,30 +80,53 @@ angular
                         template : 'account view'
                     }
                 }
-            })
-            .state('admin.category',{
+            });
+
+        $stateProvider
+            .state('admin.category', {
+                abstract : 'true',
                 url : '/category',
                 views : {
                     content : {
-                        templateUrl : '../views/lists/categories.html',
+                        template : '<div ui-view="category"></div>'
+                    }
+                }
+            })
+            .state('admin.category.list',{
+                url : '/',
+                views : {
+                    category : {
+                        templateUrl : '../views/category/list.html',
                         controller : 'CategoryListController'
                     }
                 }
             })
-            .state('admin.categoryCreate', {
-                url : '/category/create',
+            .state('admin.category.create', {
+                url : '/create',
                 views : {
-                    content : {
-                        templateUrl : '../views/forms/category_create.html',
+                    category : {
+                        templateUrl : '../views/category/create.html',
                         controller : 'CategoryCreateController'
                     }
                 }
             })
-            .state('admin.categoryView', {
-                url : '/category/:id',
+            .state('admin.category.update', {
+                url : '/:id',
                 views : {
-                    content : {
-                        template: 'HELLO'
+                    category : {
+                        templateUrl: '../views/category/update.html',
+                        controller: 'CategoryUpdateController',
+                        resolve : {
+                            category : [
+                                'Restangular',
+                                '$stateParams',
+                                function(Restangular, $stateParams){
+                                    return Restangular
+                                        .one('category', $stateParams.id)
+                                        .get({ raw : true})
+                                }
+                            ]
+                        }
                     }
                 }
             });
@@ -111,11 +134,26 @@ angular
     }])
     .config(['$urlRouterProvider', function($urlRouterProvider){
         $urlRouterProvider
-            .otherwise('/notFound');
+            .otherwise('/');
     }])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider){
-        //cfpLoadingBarProvider.includeSpinner = false;
+        cfpLoadingBarProvider.includeSpinner = false;
     }])
-    .config(['RestangularProvider', function($restangularProvider){
+    .config(['RestangularProvider', '$stateProvider', function($restangularProvider, $state){
         $restangularProvider.setBaseUrl('http://api.eventio.gr');
-    }]);
+        $restangularProvider.setFullResponse(true);
+    }])
+    .run([
+        '$rootScope',
+        'Restangular',
+        '$state',
+        function($rootScope, Restangular, $state){
+            Restangular.setErrorInterceptor(function(response, deferred, responseHandler){
+                if(response.status == 404){
+                    $state.go('http.notFound');
+                }else if(response.status == 500){
+                    $state.go('http.serverError');
+                }
+            });
+        }
+    ]);
