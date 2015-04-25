@@ -12,6 +12,7 @@ angular.module('eventioWebApp')
         'locales',
         'category',
         function($scope, Restangular, i18n, locales, category){
+            category = category.data;
 
             $scope.supportedLocales = locales;
             $scope.addedLocales = [];

@@ -5,9 +5,17 @@
             <header>
 
                 <h3>{{'category_create_title' | translate}}</h3>
-                <md-divider></md-divider>
             </header>
+            <md-divider></md-divider>
+            <section layout="row" layout-padding layout-align="center center">
+                <md-select placeholder="{{'category_parent' | translate}}" ng-model="category.locale" flex="50" >
+                    <md-option ng-repeat="locale in supportedLocales" value="{{locale.value}}" translate>
+                        {{locale.translation}}
+                    </md-option>
+                </md-select>
+            </section>
             <section layout="row" layout-md="column" layout-sm="column" layout-padding>
+
                 <md-input-container flex flex-md="100" flex-sm="100">
                     <label>
                         {{'category_name' | translate}}

@@ -87,3 +87,10 @@ body *{
 .cursor-pointer {
     cursor: pointer;
 }
+
+.rotate-90 {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+}

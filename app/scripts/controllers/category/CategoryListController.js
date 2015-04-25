@@ -24,10 +24,10 @@ angular.module('eventioWebApp')
             Restangular.one('category')
                 .get()
                 .then(function (categories) {
-                    $scope.categories = categories.results;
-                    $scope.nextUrl = categories.next;
-                    $scope.currentPage = categories.currentPage;
-                    $scope.totalPages = categories.totalPages;
+                    $scope.categories = categories.data.results;
+                    $scope.nextUrl = categories.data.next;
+                    $scope.currentPage = categories.data.currentPage;
+                    $scope.totalPages = categories.data.totalPages;
                     $scope.disablePaging = false;
                 });
 
@@ -39,13 +39,13 @@ angular.module('eventioWebApp')
                             page: $scope.currentPage + 1
                         })
                         .then(function (categories) {
-                            if(categories.results.length > 0){
-                                for(var i=0; i< categories.results.length; i++){
-                                    $scope.categories.push(categories.results[i]);
+                            if(categories.data.results.length > 0){
+                                for(var i=0; i< categories.data.results.length; i++){
+                                    $scope.categories.push(categories.data.results[i]);
                                 }
                             }
-                            $scope.currentPage = categories.currentPage;
-                            $scope.totalPages = categories.totalPages;
+                            $scope.currentPage = categories.data.currentPage;
+                            $scope.totalPages = categories.data.totalPages;
                             $scope.disablePaging = false;
                         });
                 }

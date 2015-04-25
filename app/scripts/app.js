@@ -25,6 +25,9 @@ angular
         'restangular',
         'infinite-scroll'
     ])
+    .constant('responseCodes', {
+        delete_entry_not_found_err        : 1301
+    })
     .constant('locales', [
         { value : 'el-gr', translation : 'locale_el_gr'},
         { value : 'en', translation : 'locale_en'},
@@ -147,10 +150,16 @@ angular
         '$rootScope',
         'Restangular',
         '$state',
-        function($rootScope, Restangular, $state){
+        'responseCodes',
+        '$mdToast',
+        function($rootScope, Restangular, $state, responseCodes, $mdToast){
             Restangular.setErrorInterceptor(function(response, deferred, responseHandler){
                 if(response.status == 404){
-                    $state.go('http.notFound');
+                    if(response.errorCode == responseCodes.delete_entry_not_found_err){
+                        //when fails to delete a record
+                    }
+                    console.log(response);
+                    if(!response.errorCode) $state.go('http.notFound');
                 }else if(response.status == 500){
                     $state.go('http.serverError');
                 }
