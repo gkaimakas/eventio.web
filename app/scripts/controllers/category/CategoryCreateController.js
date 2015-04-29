@@ -12,9 +12,22 @@ angular.module('eventioWebApp')
         function ($scope, locales, Restangular, $mdToast, i18n) {
             $scope.supportedLocales = locales;
             $scope.addedLocales = [];
+            $scope.disableSubmit = false;
 
             $scope.addAdditionalLocale = function () {
                 $scope.addedLocales.push((new Date()).getTime());
+            };
+
+            $scope.loadParents = function(){
+                return Restangular
+                    .all('category')
+                    .getList()
+                    .then(function(categories){
+                        $scope.availableParents = categories.data;
+                    })
+                    .catch(function(err){
+
+                    });
             };
 
             $scope.category = {};
@@ -28,36 +41,36 @@ angular.module('eventioWebApp')
             };
 
             $scope.submit = function (form, data) {
+                console.log(data);
+                $scope.disableSubmit = true;
                 var locales = [];
                 var values = [];
 
                 angular.copy(data.additionalLocales, locales);
                 angular.copy(data.additionalValues, values);
 
-                locales.push(data.locale);
+                locales.push(data.default_locale);
                 values.push(data.name);
 
                 var objFinal = {
                     name: i18n.serializeToJSON(values, locales),
-                    locale: data.locale
+                    default_locale: data.default_locale,
+                    parent : data.parent
                 };
 
                 console.log(objFinal);
-
-
-                //
-                //$mdToast.show(
-                //    $mdToast.simple()
-                //        .content('Simple Toast!')
-                //        .position('bottom left')
-                //        .hideDelay(3000)
-                //);
-                //Restangular
-                //    .all('category')
-                //    .post(data)
-                //    .then(function(res){
-                //       console.log(res);
-                //    });
+                Restangular
+                    .all('category')
+                    .post(objFinal)
+                    .then(function(res){
+                       console.log(res);
+                    })
+                    .catch(function(err){
+                        console.log(err);
+                    })
+                    .finally(function(){
+                        $scope.disableSubmit = false;
+                    })
             }
         }
     ])

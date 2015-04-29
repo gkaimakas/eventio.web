@@ -94,3 +94,11 @@ body *{
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
 }
+
+md-input-container {
+    overflow-x: visible;
+}
+
+.height-48 {
+    height: 48px;
+}

@@ -28,8 +28,13 @@
   "locale_fr" : "Γαλλικά",
 
   "nav_category" : "Κατηγορίες",
+  "nav_settings" : "Ρυθμισεις",
 
   "submit_create" : "Δημιουργία",
   "submit_update" : "Ενημέρωση",
-  "submit_remove" : "Διαγραφή"
+  "submit_remove" : "Διαγραφή",
+  "subcategories_title" : "Υποκατηγορίες",
+
+  "validation_required_err" : "Να συμπληρώσουμε κάτι εδώ;",
+  "validation_min_length_err" : "Γράψε κάτι παραπάνω"
 }

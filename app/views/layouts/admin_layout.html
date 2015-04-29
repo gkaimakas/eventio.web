@@ -14,14 +14,19 @@
                 </li>
                 <li>
                     <md-button class="full-width text-left height-50" ui-sref="admin.category.list">
+                        <img src="../bower_components/material-design-icons/action/1x_web/ic_list_grey600_18dp.png">
                         {{ 'nav_category' | translate}}
+                    </md-button>
+                    <md-button class="full-width text-left height-50" ui-sref="admin.category.list">
+                        <img src="../bower_components/material-design-icons/action/1x_web/ic_settings_grey600_18dp.png">
+                        {{ 'nav_settings' | translate}}
                     </md-button>
                 </li>
             </ul>
         </md-content>
     </md-sidenav>
 
-    <div layout="column" flex tabindex="-1" role="main" class="full-height overflow-y">
+    <div layout="column" flex tabindex="-1" role="main">
         <md-toolbar class="md-default-theme" layout="row">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" ng-click="toggleSidenav()" aria-label="Settings" hide-gt-md>
@@ -31,7 +36,7 @@
             </div>
         </md-toolbar>
 
-        <div ui-view="content" flex layout-padding>
+        <div ui-view="content" flex layout-padding  class="full-height overflow-y">
         </div>
     </div>
 </div>

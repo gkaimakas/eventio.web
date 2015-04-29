@@ -11,11 +11,17 @@ angular.module('eventioWebApp')
         'i18nService',
         'locales',
         'category',
-        function($scope, Restangular, i18n, locales, category){
-            category = category.data;
+        'parents',
+        function($scope, Restangular, i18n, locales, category, parents){
+
+            category.getList('subcategory')
+                .then(function(children){
+                    $scope.children = children.data;
+                });
 
             $scope.supportedLocales = locales;
             $scope.addedLocales = [];
+            $scope.disableSubmit = false;
 
             var deserializedArray =i18n.deserializeFromJSON(category.name, category.default_locale);
             var uniqueId = (new Date()).getTime();
@@ -23,15 +29,22 @@ angular.module('eventioWebApp')
                 $scope.addedLocales.push(uniqueId+i);
             }
 
+
+            $scope.availableParents = parents;
+
             $scope.category = {};
             $scope.category.additionalLocales = [];
             $scope.category.additionalValues = [];
 
             $scope.category.id = category.id;
             $scope.category.name = category.name[category.default_locale];
-            $scope.category.locale = category.default_locale;
+            $scope.category.default_locale = category.default_locale;
             $scope.category.additionalLocales = deserializedArray.locales;
             $scope.category.additionalValues = deserializedArray.values;
+
+            if(category.parent){
+                $scope.category.parent = category.parent.id;
+            }
 
             $scope.addAdditionalLocale = function () {
                 $scope.addedLocales.push((new Date()).getTime());
@@ -42,19 +55,23 @@ angular.module('eventioWebApp')
                 $scope.category.additionalLocales.splice(index, 1);
                 $scope.category.additionalValues.splice(index, 1);
             };
+
             $scope.submit = function (form, data) {
                 var locales = [];
                 var values = [];
 
+                $scope.disableSubmit = true;
+
                 angular.copy(data.additionalLocales, locales);
                 angular.copy(data.additionalValues, values);
 
-                locales.push(data.locale);
+                locales.push(data.default_locale);
                 values.push(data.name);
 
                 var objFinal = {
                     name: i18n.serializeToJSON(values, locales),
-                    locale: data.locale
+                    default_locale: data.default_locale,
+                    parent : data.parent
                 };
 
                 Restangular
@@ -62,6 +79,10 @@ angular.module('eventioWebApp')
                     .put(objFinal)
                     .then(function(res){
                        console.log(res);
+                    })
+                    .catch(function(err){})
+                    .finally(function(){
+                        $scope.disableSubmit = false;
                     });
             };
 

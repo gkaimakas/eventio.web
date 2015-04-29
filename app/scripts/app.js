@@ -127,6 +127,20 @@ angular
                                     return Restangular
                                         .one('category', $stateParams.id)
                                         .get({ raw : true})
+                                        .then(function(result){
+                                           return result.data;
+                                        });
+                                }
+                            ],
+                            parents : [
+                                'Restangular',
+                                function(Restangular){
+                                    return Restangular
+                                        .all('category')
+                                        .getList()
+                                        .then(function(category){
+                                            return category.data;
+                                        })
                                 }
                             ]
                         }
@@ -143,7 +157,7 @@ angular
         cfpLoadingBarProvider.includeSpinner = false;
     }])
     .config(['RestangularProvider', '$stateProvider', function($restangularProvider, $state){
-        $restangularProvider.setBaseUrl('http://api.eventio.gr');
+        $restangularProvider.setBaseUrl('http://localhost:1337');
         $restangularProvider.setFullResponse(true);
     }])
     .run([

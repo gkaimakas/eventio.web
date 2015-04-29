@@ -6,8 +6,18 @@
             <header>
 
                 <h3>{{'category_update_title' | translate}} : {{category.id}}</h3>
-                <md-divider></md-divider>
             </header>
+
+            <md-divider></md-divider>
+
+            <section layout="row" layout-padding layout-align="center center">
+                <md-select placeholder="{{'category_parent' | translate}}" ng-model="category.parent" flex="50">
+                    <md-option ng-repeat="parent in availableParents" value="{{parent.id}}" translate>
+                        {{parent.name}}
+                    </md-option>
+                </md-select>
+            </section>
+
             <section layout="row" layout-md="column" layout-sm="column" layout-padding>
                 <md-input-container flex flex-md="100" flex-sm="100">
                     <label>
@@ -16,7 +26,7 @@
                     <input type="text" ng-model="category.name">
                 </md-input-container>
 
-                <md-select placeholder="{{'category_locale_default' | translate}}" ng-model="category.locale" flex="30"
+                <md-select placeholder="{{'category_locale_default' | translate}}" ng-model="category.default_locale" flex="30"
                            flex-md="100" flex-sm="100" class="align-with-input">
                     <md-option ng-repeat="locale in supportedLocales" value="{{locale.value}}" translate>
                         {{locale.translation}}
@@ -53,15 +63,34 @@
                     </section>
 
                     <md-button ng-click="removeAdditionalLocale($index)" type="button" aria-label="remove entry"
-                               class="md-icon-button align-with-input square-48">
+                               class="md-icon-button align-with-input square-48" >
                         <img src="../../../bower_components/material-design-icons/content/1x_web/ic_clear_grey600_24dp.png">
                     </md-button>
                 </section>
             </section>
 
+            <header ng-show="children.length != 0">
+                <h3>{{'subcategories_title' | translate}}</h3>
+            </header>
+            <md-divider ng-show="children.length != 0"></md-divider>
+
+            <section ng-show="children.length != 0" class="margin-top-40">
+                <md-list>
+                    <md-list-item class="md-3-line" ng-repeat="child in children" layout="row" layout-align="center center">
+                        <div class="md-list-item-text cursor-pointer" layout-padding flex="50" layout="row">
+                            <md-button class="md-primary height-48" flex ui-sref="admin.category.update({id : child.id})">{{child.name}}</md-button>
+                            <md-button ng-click="removeSubCategory($index)" type="button" aria-label="remove entry"
+                                       class="md-icon-button square-48" >
+                                <img src="../../../bower_components/material-design-icons/content/1x_web/ic_clear_grey600_24dp.png">
+                            </md-button>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </section>
+
             <section layout="row" class="margin-top-40" layout-align="end">
                 <md-button type="button" class="md-primary" ng-click="remove()">{{ 'submit_remove' | translate}}</md-button>
-                <md-button type="submit" class="md-primary md-raised margin-left" >{{ 'submit_update' | translate}}</md-button>
+                <md-button type="submit" class="md-primary md-raised margin-left" ng-disabled="disableSubmit">{{ 'submit_update' | translate}}</md-button>
             </section>
         </form>
     </md-whiteframe>

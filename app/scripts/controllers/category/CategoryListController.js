@@ -22,7 +22,9 @@ angular.module('eventioWebApp')
             };
 
             Restangular.one('category')
-                .get()
+                .get({
+                    page: 1
+                })
                 .then(function (categories) {
                     $scope.categories = categories.data.results;
                     $scope.nextUrl = categories.data.next;

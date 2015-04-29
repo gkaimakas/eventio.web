@@ -11,7 +11,7 @@ angular.module('eventioWebApp')
                 for(var i=0; i< locales.length; i++){
                     obj[locales[i]] = values[i];
                 }
-                return obj;
+                return angular.toJson(obj);
             },
 
             deserializeFromJSON : function(i18nObj, localeToBeRemoved){

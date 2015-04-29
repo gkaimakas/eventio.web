@@ -3,28 +3,36 @@
         <form name="form" layout="column" flex="70" flex-sm="100" flex-md="100" layout-margin layout-padding
               ng-submit="submit(form, category)">
             <header>
-
                 <h3>{{'category_create_title' | translate}}</h3>
             </header>
+
             <md-divider></md-divider>
+
             <section layout="row" layout-padding layout-align="center center">
-                <md-select placeholder="{{'category_parent' | translate}}" ng-model="category.locale" flex="50" >
-                    <md-option ng-repeat="locale in supportedLocales" value="{{locale.value}}" translate>
-                        {{locale.translation}}
+                <md-select placeholder="{{'category_parent' | translate}}" ng-model="category.parent" flex="50"
+                           md-on-open="loadParents()">
+                    <md-option ng-repeat="parent in availableParents" value="{{parent.id}}" translate>
+                        {{parent.name}}
                     </md-option>
                 </md-select>
             </section>
+
             <section layout="row" layout-md="column" layout-sm="column" layout-padding>
 
                 <md-input-container flex flex-md="100" flex-sm="100">
                     <label>
                         {{'category_name' | translate}}
                     </label>
-                    <input type="text" ng-model="category.name">
+                    <input type="text" ng-model="category.name" name="categoryName" required minlength="2">
+
+                    <div ng-messages="form.categoryName.$error" ng-show="form.$submitted || form.categoryName.$dirty">
+                        <div ng-message="required"> {{ 'validation_required_err' | translate}}</div>
+                        <div ng-message="minlength"> {{ 'validation_min_length_err' | translate}}</div>
+                    </div>
                 </md-input-container>
 
-                <md-select placeholder="{{'category_locale_default' | translate}}" ng-model="category.locale" flex="30"
-                           flex-md="100" flex-sm="100" class="align-with-input">
+                <md-select placeholder="{{'category_locale_default' | translate}}" ng-model="category.default_locale"
+                           flex="30" flex-md="100" flex-sm="100" class="align-with-input">
                     <md-option ng-repeat="locale in supportedLocales" value="{{locale.value}}" translate>
                         {{locale.translation}}
                     </md-option>
@@ -66,8 +74,10 @@
                 </section>
             </section>
 
-            <section layout="row" class="margin-top-40">
-                <md-button type="submit" class="md-primary md-raised" flex>submit</md-button>
+            <section layout="row" class="margin-top-40" layout-align="end">
+                <md-button type="submit" class="md-primary md-raised " ng-disabled="disableSubmit">{{ 'submit_create' |
+                    translate}}
+                </md-button>
             </section>
 
         </form>
